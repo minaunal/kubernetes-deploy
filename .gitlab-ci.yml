@@ -79,7 +79,7 @@ deploy:
   variables:
     KUBECONFIG: /root/.kube/config  
   script:
-    - export KUBECONFIG="${KUBECONFIG}:${HOME}/root/.kube/config"
+    - export KUBECONFIG="${KUBECONFIG}:${HOME}/.kube/config"
     - kubectl config use-context codecamp
     - kubectl get pods -n mina
     - kubectl get cluster-info 
