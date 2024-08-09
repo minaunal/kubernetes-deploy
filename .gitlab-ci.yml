@@ -79,7 +79,8 @@ deploy:
   variables:
     KUBECONFIG: /root/.kube/config  
   script:
-    - kubectl config use-context $KUBECONFIG
+    - export KUBECONFIG="${KUBECONFIG}:${HOME}/root/.kube/config"
+    - kubectl config use-context codecamp
     - kubectl get pods -n mina
     - kubectl get cluster-info 
     - kubectl apply -f service.yml \ apply -f hpa.yml \ apply -f deployment.yml -n mina
