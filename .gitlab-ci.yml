@@ -76,8 +76,11 @@ deploy:
   image: 
     name: bitnami/kubectl:latest
     entrypoint: [""]
+  before_script:
+    - export KUBECONFIG=$(pwd)/config
+    - echo "$KUBECONFIG_CONTENT">$KUBECONFIG
   variables:
-    KUBECONFIG: /root/.kube/config  
+    KUBECONFIG: /root/.kube/config
   script:
     - kubectl config view
     - kubectl config use-context $CONTEXT_NAME
