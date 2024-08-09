@@ -82,7 +82,7 @@ deploy:
   variables:
     KUBECONFIG: /builds/mina-unal/.kube/config
   script:
-    - kubectl apply -f service.yml \ apply -f hpa.yml \ apply -f deployment.yml -n mina
+    - kubectl apply -f service.yml -f hpa.yml -f deployment.yml -n mina
     - kubectl get cluster-info 
     - kubectl get svc my-python-app -n mina
     - kubectl describe svc my-python-app -n mina
