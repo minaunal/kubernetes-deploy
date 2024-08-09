@@ -17,16 +17,16 @@ spec:
       - name: my-python-app
         image: k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/kubernetes
         ports:
-        - containerPort: 8080
+        - containerPort: 5000
         livenessProbe:
           httpGet:
             path: /
-            port: 8080
+            port: 5000
           initialDelaySeconds: 30
           periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /
-            port: 8080
+            port: 5000
           initialDelaySeconds: 30
           periodSeconds: 10
