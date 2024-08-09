@@ -49,37 +49,37 @@ docker:
     - docker build -t "k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/python" .
     - docker login -u mina.unal -p 2EY5pk2S9Gar https://k8s-master-codecamp24.obss.io:30003/
     - docker push "k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/python"
-# analyze:
-#   stage: analyze
-#   image:
-#     name: sonarsource/sonar-scanner-cli:5.0.1
-#     entrypoint: [""]
-#   variables:
-#     SONAR_SCANNER_OPTS: "-Xmx1024m"
-#     GIT_DEPTH: 0
-#     SONAR_HOST_URL: https://codecamp24-sonarqube.obss.io
-#     SONAR_TOKEN: "sqa_5f9f35a0e6357e919b55c0f8cba279f175f9593c"
-#   before_script:
-#     - echo "192.168.210.103 codecamp24-sonarqube.obss.io" >> /etc/hosts
-#     - echo "192.168.210.104 codecamp24-sonarqube.obss.io" >> /etc/hosts
-#   script:
-#     - |
-#       sonar-scanner -Dsonar.userHome='/tmp' -Dsonar.qualitygate.wait=true \
-#         -Dsonar.projectKey="${CI_PROJECT_NAMESPACE//\//-}-$CI_PROJECT_NAME" \
-#         -Dsonar.projectName="$CI_PROJECT_TITLE" \
-#         -Dsonar.projectVersion="$CI_COMMIT_REF_SLUG" \
-#         -Dsonar.host.url="${SONAR_HOST_URL}" \
-#         -Dsonar.login="${SONAR_TOKEN}"
-#   allow_failure: true
+analyze:
+  stage: analyze
+  image:
+    name: sonarsource/sonar-scanner-cli:5.0.1
+    entrypoint: [""]
+  variables:
+    SONAR_SCANNER_OPTS: "-Xmx1024m"
+    GIT_DEPTH: 0
+    SONAR_HOST_URL: https://codecamp24-sonarqube.obss.io
+    SONAR_TOKEN: "sqa_5f9f35a0e6357e919b55c0f8cba279f175f9593c"
+  before_script:
+    - echo "192.168.210.103 codecamp24-sonarqube.obss.io" >> /etc/hosts
+    - echo "192.168.210.104 codecamp24-sonarqube.obss.io" >> /etc/hosts
+  script:
+    - |
+      sonar-scanner -Dsonar.userHome='/tmp' -Dsonar.qualitygate.wait=true \
+        -Dsonar.projectKey="${CI_PROJECT_NAMESPACE//\//-}-$CI_PROJECT_NAME" \
+        -Dsonar.projectName="$CI_PROJECT_TITLE" \
+        -Dsonar.projectVersion="$CI_COMMIT_REF_SLUG" \
+        -Dsonar.host.url="${SONAR_HOST_URL}" \
+        -Dsonar.login="${SONAR_TOKEN}"
+  allow_failure: true
 deploy:
   stage: deploy
   image: 
     name: bitnami/kubectl:latest
     entrypoint: [""]
   variables:
-    KUBECONFIG: /root/.kube/config  # Bu, WSL içindeki doğru yol olmalı
+    KUBECONFIG: /root/.kube/config  
   script:
-    - kubectl config use-context codecamp
+    - kubectl config use-context $KUBECONFIG
     - kubectl get pods -n mina
     - kubectl get cluster-info 
     - kubectl apply -f service.yml \ apply -f hpa.yml \ apply -f deployment.yml -n mina
