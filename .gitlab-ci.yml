@@ -82,7 +82,6 @@ deploy:
   variables:
     KUBECONFIG: /root/.kube/config
   script:
-    - kubectl get pods -n mina
     - kubectl get cluster-info 
     - kubectl apply -f service.yml \ apply -f hpa.yml \ apply -f deployment.yml -n mina
     - kubectl get svc my-python-app -n mina
