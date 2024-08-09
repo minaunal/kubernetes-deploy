@@ -16,8 +16,8 @@ COPY . .
 # Define environment variable
 ENV FLASK_APP=app.py
 
-# Expose port 5000
-EXPOSE 5000
+# Expose port 8080
+EXPOSE 8080
 
 # Run the application
 CMD ["flask", "run", "--host=0.0.0.0"]
