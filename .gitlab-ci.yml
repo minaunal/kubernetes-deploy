@@ -73,7 +73,9 @@ analyze:
   allow_failure: true
 deploy:
   stage: deploy
-  image: bitnami/kubectl:latest
+  image: 
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
   variables:
     KUBECONFIG: /root/.kube/config
   script:
