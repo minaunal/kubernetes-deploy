@@ -77,7 +77,7 @@ deploy:
     name: bitnami/kubectl:latest
     entrypoint: [""]
   before_script:
-    - export KUBECONFIG=$(pwd)/config
+    - export KUBECONFIG=C:\Users\HP01\.kube\config
     - echo "$KUBECONFIG_CONTENT">$KUBECONFIG
   variables:
     KUBECONFIG: /builds/mina-unal/.kube/config
