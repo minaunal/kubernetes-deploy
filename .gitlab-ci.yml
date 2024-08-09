@@ -76,14 +76,13 @@ deploy:
   image: 
     name: bitnami/kubectl:latest
     entrypoint: [""]
-  before_script:
-    - export KUBECONFIG=$(pwd)/config
-    - echo "$KUBECONFIG_CONTENT">$KUBECONFIG
-  variables:
-    KUBECONFIG: /builds/mina-unal/.kube/config
   script:
-    - kubectl cluster-info 
+    - kubectl config set-cluster ${K8S_CLUSTER_NAME} --server=${K8S_SERVER} --insecure-skip-tls-verify=true
+    - kubectl config set-credentials ${K8S_USER} --token=${K8S_TOKEN}
+    - kubectl config set-context codecamp --cluster=${K8S_CLUSTER_NAME} --user=${K8S_USER} --namespace mina
+    - kubectl config use-context codecamp
     - kubectl get pods -n mina
-    - kubectl apply -f service.yml -f hpa.yml -f deployment.yml -n mina
+    - kubectl get cluster-info 
+    - kubectl apply -f service.yml \ apply -f hpa.yml \ apply -f deployment.yml -n mina
     - kubectl get svc my-python-app -n mina
     - kubectl describe svc my-python-app -n mina
