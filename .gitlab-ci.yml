@@ -82,10 +82,9 @@ deploy:
   variables:
     KUBECONFIG: /builds/mina-unal/.kube/config
   script:
-    - kubectl apply -f namespace.yaml -f deployment.yaml -f service.yaml -f hpa.yaml -n mina
+    - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina
     - kubectl get pods -n mina
-    - kubectl get svc python-api-service -n mina
-    - kubectl describe svc python-api-service -n mina
-    - kubectl rollout restart deployment/python-api -n mina
+    - kubectl get svc my-python-app -n mina
+    - kubectl describe svc my-python-app -n mina
   only:
     - main
