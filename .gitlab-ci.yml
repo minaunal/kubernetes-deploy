@@ -77,7 +77,7 @@ deploy:
     name: bitnami/kubectl:latest
     entrypoint: [""]
   variables:
-    KUBECONFIG: C:\Users\HP01\.kube\config
+    KUBECONFIG: /root/.kube/config  # Bu, WSL içindeki doğru yol olmalı
   script:
     - kubectl config use-context codecamp
     - kubectl get pods -n mina
