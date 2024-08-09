@@ -77,5 +77,9 @@ deploy:
   variables:
     KUBECONFIG: /root/.kube/config
   script:
-    - kubectl set image deployment/my-python-app my-python-app=${DOCKER_IMAGE_URI}:${DOCKER_IMAGE_TAG} -n mina
-    - kubectl rollout status deployment/my-python-app -n mina
+    - kubectl config use-context codecamp
+    - kubectl get pods -n mina
+    - kubectl get cluster-info 
+    - kubectl apply -f service.yml \ apply -f hpa.yml \ apply -f deployment.yml -n mina
+    - kubectl get svc my-python-app -n mina
+    - kubectl describe svc my-python-app -n mina
