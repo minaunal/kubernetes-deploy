@@ -83,8 +83,5 @@ deploy:
     KUBECONFIG: /builds/mina-unal/.kube/config
   script:
     - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina --validate=false
-    - kubectl get pods -n mina
-    - kubectl get svc my-python-app -n mina
-    - kubectl describe svc my-python-app -n mina
   only:
     - main
