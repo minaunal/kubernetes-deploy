@@ -73,9 +73,9 @@ analyze:
   allow_failure: true
 deploy:
   stage: deploy
+  image: bitnami/kubectl:latest
+  variables:
+    KUBECONFIG: /root/.kube/config
   script:
-    - echo "Deploying to Kubernetes..."
-    - kubectl apply -f python/deployment.yml
-    - kubectl apply -f python/service.yml
-    - kubectl apply -f python/hpa.yml
-  only:
+    - kubectl set image deployment/my-python-app my-python-app=${DOCKER_IMAGE_URI}:${DOCKER_IMAGE_TAG} -n mina
+    - kubectl rollout status deployment/my-python-app -n mina
