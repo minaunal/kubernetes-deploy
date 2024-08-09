@@ -9,7 +9,7 @@ spec:
     app: my-python-app
   ports:
     - protocol: TCP
-      port: 5000        # Bu, servisin Kubernetes içindeki portudur.
-      targetPort: 5000  # Bu, pod içindeki portudur.
+      port: 8080        # Bu, servisin Kubernetes içindeki portudur.
+      targetPort: 8080  # Bu, pod içindeki portudur.
       nodePort: 32000   # Bu, node üzerindeki portudur.
 
