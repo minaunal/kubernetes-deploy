@@ -77,7 +77,7 @@ deploy:
     name: bitnami/kubectl:latest
     entrypoint: [""]
   variables:
-    KUBECONFIG: /root/.kube/config
+    KUBECONFIG: C:\Users\HP01\.kube\config
   script:
     - kubectl config use-context codecamp
     - kubectl get pods -n mina
