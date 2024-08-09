@@ -80,7 +80,7 @@ deploy:
     - export KUBECONFIG=$(pwd)/config
     - echo "$KUBECONFIG_CONTENT">$KUBECONFIG
   variables:
-    KUBECONFIG: /root/.kube/config
+    KUBECONFIG: /builds/mina-unal/.kube/config
   script:
     - kubectl get cluster-info 
     - kubectl apply -f service.yml \ apply -f hpa.yml \ apply -f deployment.yml -n mina
