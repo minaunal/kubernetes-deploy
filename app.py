@@ -1,16 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'Welcome to the Web App!'
-
-@app.route('/api')
-def api():
-    response = requests.get('https://jsonplaceholder.typicode.com/posts/1')
-    data = response.json()
-    return jsonify(data)
+    return "Hello, Kubernetes!"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
