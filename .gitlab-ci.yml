@@ -77,13 +77,14 @@ deploy:
     name: bitnami/kubectl:latest
     entrypoint: [""]
   before_script:
-    - echo "pwd is $(pwd)"
-    - export KUBECONFIG=C:\Users\HP01\.kube\config
+    - export KUBECONFIG=$(pwd)/config
     - echo "$KUBECONFIG_CONTENT" > $KUBECONFIG
   variables:
     KUBECONFIG: /builds/mina-unal/.kube/config
   script:
     - kubectl config use-context codecamp
-    - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina --validate=false
+    - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina 
+    - kubectl get svc my-python-app -n mina
+    - kubectl describe svc my-python-app -n mina
   only:
     - main
