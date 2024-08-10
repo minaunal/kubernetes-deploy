@@ -82,7 +82,6 @@ deploy:
   variables:
     KUBECONFIG: /builds/mina-unal/.kube/config
   script:
-    - kubectl config use-context codecamp
     - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina 
     - kubectl get svc my-python-app -n mina
     - kubectl describe svc my-python-app -n mina
