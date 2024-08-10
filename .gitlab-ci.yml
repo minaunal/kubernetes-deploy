@@ -76,10 +76,13 @@ deploy:
   image: 
     name: bitnami/kubectl:latest
     entrypoint: [""]
+  variables:
+    KUBECONFIG: "/builds/$CI_PROJECT_PATH/.kube/config"
+  before_script:
+    - export KUBECONFIG=$(pwd)/config
+    - echo "$KUBECONFIG_CONTENT" > $KUBECONFIG
   script:
-    - kubectl config set-context codecamp --cluster=${K8S_CLUSTER_NAME} --user=${K8S_USER} --namespace=mina
-    - kubectl config use-context codecamp
-    - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina --validate=false
+    - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina
     - kubectl get svc my-python-app -n mina
     - kubectl describe svc my-python-app -n mina
   only:
