@@ -77,6 +77,7 @@ deploy:
     name: bitnami/kubectl:latest
     entrypoint: [""]
   before_script:
+    - echo "pwd is $(pwd)"
     - export KUBECONFIG=C:\Users\HP01\.kube\config
     - echo "$KUBECONFIG_CONTENT" > $KUBECONFIG
   variables:
