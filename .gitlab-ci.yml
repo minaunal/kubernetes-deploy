@@ -73,14 +73,14 @@ analyze:
   allow_failure: true
 deploy:
   stage: deploy
-  image: 
+  image:
     name: bitnami/kubectl:latest
     entrypoint: [""]
-  variables:
-    KUBECONFIG: "/builds/$CI_PROJECT_PATH/.kube/config"
   before_script:
     - export KUBECONFIG=$(pwd)/config
-    - echo "$KUBECONFIG_CONTENT" > $KUBECONFIG
+    - echo "$KUBECONFIG_CONTENT">$KUBECONFIG
+  variables:
+    KUBECONFIG: /builds/mina-unal/.kube/config
   script:
     - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina --validate=false
     - kubectl get svc my-python-app -n mina
