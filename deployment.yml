@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: my-python-app
-        image: k8s-master-codecamp24.obss.io:32000/codecamp/minaunal/kubernetes
+        image: k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/kubernetes
         ports:
         - containerPort: 8080
         livenessProbe:
