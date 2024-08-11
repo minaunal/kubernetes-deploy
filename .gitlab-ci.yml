@@ -80,8 +80,9 @@ deploy:
   variables:
     KUBECONFIG: "/builds/${CI_PROJECT_PATH}/.kube/config"
   before_script:
-    - mkdir -p ~/.kube
-    - cp $KUBECONFIG ~/.kube/config
+  - mkdir -p ~/.kube
+  - ls -ld ~/.kube  # Bu komut dizinin mevcut olduğunu doğrular
+  - cp $KUBECONFIG ~/.kube/config
   script:
     - kubectl cluster-info
   only:
