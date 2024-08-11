@@ -75,7 +75,7 @@ analyze:
 deploy:
   stage: deploy
   image:
-    name: bitnami/kubectl:latest
+    name: bitnami/kubectl:1.29.6
     entrypoint: [""]
   script:
     - kubectl cluster-info
