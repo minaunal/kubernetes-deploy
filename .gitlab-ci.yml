@@ -77,6 +77,11 @@ deploy:
   image:
     name: bitnami/kubectl:1.29.6
     entrypoint: [""]
+  variables:
+  KUBECONFIG: "/builds/${CI_PROJECT_PATH}/.kube/config"
+  before_script:
+  - mkdir -p ~/.kube
+  - cp $KUBECONFIG ~/.kube/config
   script:
     - kubectl cluster-info
   only:
