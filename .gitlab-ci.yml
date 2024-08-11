@@ -46,9 +46,9 @@ docker:
     - export DOCKER_IMAGE_TAG=${CI_COMMIT_SHORT_SHA}
   script:
     - docker login -u minaunall -p mina12345l.
-    - docker build -t "k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/python" .
+    - docker build -t "k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/kubernetes" .
     - docker login -u mina.unal -p 2EY5pk2S9Gar https://k8s-master-codecamp24.obss.io:30003/
-    - docker push "k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/python"
+    - docker push "k8s-master-codecamp24.obss.io:30003/codecamp/minaunal/kubernetes"
 analyze:
   stage: analyze
   image:
