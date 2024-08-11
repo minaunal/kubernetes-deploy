@@ -82,7 +82,7 @@ deploy:
   variables:
     KUBECONFIG: /builds/mina-unal/.kube/config
   script:
-    - kubectl apply -f role.yml -f deployment.yml -f service.yml -f hpa.yml -n mina --validate=false
+    - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina
     - kubectl get svc my-python-app -n mina
     - kubectl describe svc my-python-app -n mina
   only:
