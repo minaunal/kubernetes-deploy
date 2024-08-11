@@ -79,7 +79,9 @@ deploy:
     entrypoint: [""]
   before_script:
     - export KUBECONFIG=$(pwd)/config
-    - echo "$KUBECONFIG_CONTENT" > $KUBECONFIG
+    - echo "$KUBECONFIG_CONTENT">$KUBECONFIG
+  variables:
+    KUBECONFIG: /builds/mina-unal/.kube/config
   script:
     - kubectl cluster-info
   only:
