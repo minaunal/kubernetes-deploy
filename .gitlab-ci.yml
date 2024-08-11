@@ -78,8 +78,8 @@ deploy:
     name: bitnami/kubectl:1.29.6
     entrypoint: [""]
   before_script:
-    - mkdir -p $HOME/.kube
-    - echo "$KUBECONFIG_CONTENT" > $HOME/.kube/config
+    - export KUBECONFIG=$(pwd)/config
+    - echo "$KUBECONFIG_CONTENT" > $KUBECONFIG
   script:
     - kubectl cluster-info
   only:
