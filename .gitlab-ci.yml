@@ -77,16 +77,7 @@ deploy:
   image:
     name: bitnami/kubectl:latest
     entrypoint: [""]
-  before_script:
-    - mkdir -p /builds/mina-unal/.kube
-    - export KUBECONFIG=$(pwd)/config
-    - echo "$KUBECONFIG_CONTENT">$KUBECONFIG
-  variables:
-    KUBECONFIG: /builds/mina-unal/.kube/config
   script:
     - kubectl cluster-info
-    - kubectl apply -f deployment.yml -f service.yml -f hpa.yml -n mina
-    - kubectl get svc my-python-app -n mina
-    - kubectl describe svc my-python-app -n mina
   only:
     - main
